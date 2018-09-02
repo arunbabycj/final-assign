@@ -7,15 +7,29 @@ import {BrowserModule} from "@angular/platform-browser";
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
-  styleUrls: ['./chat.component.css']
+  styleUrls: ['./chat.component.css'],
+  providers:[SocketService]
 })
 export class ChatComponent implements OnInit {
   username:string;
   messages = [];
   message;
   connection;
+  user:string;
+  room:string;
+  messageText:String;
+  messageArray:Array<{user:String,message:String}> = [];
 
-  constructor(private sockServ: SocketService, private router:Router) { }
+  constructor(private sockServ: SocketService, private router:Router) {
+      this.sockServ.newUserJoined()
+      .subscribe(data=> this.messageArray.push(data));
+
+      this.sockServ.userLeftRoom()
+      .subscribe(data=>this.messageArray.push(data));
+
+      this.sockServ.newMessageReceived()
+      .subscribe(data=>this.messageArray.push(data));
+  }
 
   ngOnInit() {
     //choice for valid user and subscribe to service (chat messages)
@@ -37,9 +51,9 @@ export class ChatComponent implements OnInit {
       //});
     }
   }
-  sendMessage(){
+  sendMessages(){
     //send a chat message to the server.
-    this.sockServ.sendMessage(this.message + '('+this.username+')');
+    this.sockServ.sendMessages(this.message + '('+this.username+')');
     //this.message = "";
   }
 
@@ -56,4 +70,17 @@ export class ChatComponent implements OnInit {
     console.log("session cleared");
     this.router.navigateByUrl('login');
   }
+
+
+  join(){
+        this.sockServ.joinRoom({user:this.user, room:this.room});
+    }
+
+    leave(){
+        this.sockServ.leaveRoom({user:this.user, room:this.room});
+    }
+
+    sendMessage(){
+        this.sockServ.sendMessage({user:this.user, room:this.room, message:this.messageText});
+    }
 }
