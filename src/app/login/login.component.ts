@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {Router} from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-login',
@@ -11,9 +13,12 @@ import {Router} from '@angular/router';
 export class LoginComponent implements OnInit {
     username : string = "";
     password : string = "";
+    showNav: boolean;
   constructor(private router:Router, private form:FormsModule) { }
 
   ngOnInit() {
+    this.showNav = true;
+
   }
 
   loginUser(event){

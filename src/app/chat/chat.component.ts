@@ -30,11 +30,11 @@ export class ChatComponent implements OnInit {
       //to the message array each time you have pushed a message from the server.
       this.username = sessionStorage.getItem('username');
       console.log("session started for:" + this.username);
-      this.connection = this.sockServ.getMessages().subscribe(message =>{
+    //  this.connection = this.sockServ.getMessages().subscribe(message =>{
         //message is a value of input field
-        this.messages.push(message);
-        this.message = " ";
-      });
+        //this.messages.push(message);
+      //  this.message = " ";
+      //});
     }
   }
   sendMessage(){

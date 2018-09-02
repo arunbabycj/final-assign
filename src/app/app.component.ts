@@ -1,4 +1,6 @@
 import { Component,OnInit } from '@angular/core';
+import {SocketService} from './services/socket/socket.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,5 @@ import { Component,OnInit } from '@angular/core';
 })
 export class AppComponent {
   title = 'Assignment';
+
 }

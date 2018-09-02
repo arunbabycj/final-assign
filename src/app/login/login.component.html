@@ -1,5 +1,14 @@
-<form (submit)="loginUser($event)">
-  <input type="name" placeholder="Username" [(ngModel)]='username' name="username" id="username">
-  <input type="password" placeholder="Password" [(ngModel)]='password'name="password" id="password">
-  <button type="submit">Submit</button>
-</form>
+
+
+
+<div id = "container">
+  <form (submit)="loginUser($event)">
+    <label for="name">Name</label>
+    <input type="name" placeholder="Username" class = "form" [(ngModel)]='username' name="username" id="username">
+
+    <label for="password">Password</label>
+    <input type="password" placeholder="Password" class = "form" [(ngModel)]='password'name="password" id="password">
+
+    <button type="submit" class ="submit">Submit</button>
+  </form>
+</div>

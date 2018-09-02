@@ -1,0 +1,5 @@
+<form (submit)="registerUser($event)">
+  <input type="name" placeholder="Username" [(ngModel)]='username' name="username" id="username">
+  <input type="password" placeholder="Password" [(ngModel)]='password'name="password" id="password">
+  <button type="submit">Submit</button>
+</form>
