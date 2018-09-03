@@ -8,7 +8,12 @@ import * as io from 'socket.io-client';
 export class SocketService {
     private url = "http://localhost:3000";
     private socket;
+    private socket1;
+    private socket2;
+    private socket3;
     constructor() { }
+
+
 
     sendMessages(message){
         this.socket.emit('add-message', message);
@@ -37,7 +42,7 @@ export class SocketService {
     newUserJoined(){
         let observable = new Observable<{user:String, message:String}>(
           observer=>{
-            this.socket = io();
+            this.socket1 = io();
             this.socket.on('new user joined', (data)=>{observer.next(data);});
             return () => {this.socket.disconnect();}
         });
@@ -52,7 +57,7 @@ export class SocketService {
     userLeftRoom(){
         let observable = new Observable<{user:String, message:String}>(
           observer=>{
-            this.socket = io();
+            this.socket2 = io();
             this.socket.on('left room', (data)=>{observer.next(data);});
             return () => {this.socket.disconnect();}
         });
@@ -67,7 +72,7 @@ export class SocketService {
     newMessageReceived(){
         let observable = new Observable<{user:String, message:String}>(
           observer=>{
-            this.socket = io();
+            this.socket3 = io();
             this.socket.on('new message', (data)=>{observer.next(data);});
             return () => {this.socket.disconnect();}
         });
