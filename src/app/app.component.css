@@ -31,3 +31,9 @@ table, th, td
 th {
     font-weight:bold;
 }
+
+.pull-right{
+  display: inline;
+  padding-right: 0.9em;
+  padding-left: 0.9em;
+}

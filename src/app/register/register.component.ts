@@ -20,7 +20,7 @@ export class RegisterComponent implements OnInit {
 
   //users: detail[] = [];
   constructor(private router:Router, private form:FormsModule, private httpService:HttpClient) { }
-  users: string [];
+  users;
   userObj : string [];
 
     ngOnInit () {
@@ -30,7 +30,60 @@ export class RegisterComponent implements OnInit {
 
   registerUser(event){
     event.preventDefault();
-  //  console.log(detail);
 
+   //  this.httpService.get('./assets/authdata.json').then(function(response){
+   //
+   //      $scope.myJsonObject = response.data;
+   //
+   //      //Your json becomes JS object here. Change it the way you want
+   //      $scope.myJsonObject.push({'name':this.username});
+   //
+   // });
+
+   this.httpService.get('./assets/authdata.json').subscribe(
+   //this.httpService.get('../authdata.json').subscribe(
+     data => {
+       this.users = data ;	 // FILL THE ARRAY WITH DATA.
+       //  console.log(this.arrBirds[1]);
+       this.users.push({'name':this.username});
+       console.log(this.users);
+     },
+     (err: HttpErrorResponse) => {
+       console.log (err.message);
+     });
+
+    // this.httpService({
+    //        method: "post",
+    //        url: "./assets/authdata.json",
+    //        data: this.users,
+    //        headers: { 'Content-Type': 'application/json; charset=utf-8' }
+    // });
+
+    // this.httpService.post("http://localhost:3000/api/register",this.users).subscribe (
+    //   data => {
+    //     console.log("done finally");
+    //     data = this.users;
+    //   },
+    //   (err: HttpErrorResponse) => {
+    //     console.log (err.message);
+    //   });
+
+  //   updateFood(food) {
+  //   let headers = new Headers({ 'Content-Type': 'application/json' });
+  //   let options = new RequestOptions({ headers: headers });
+  //   let body = JSON.stringify(food);
+  //   return this.http.put('/api/food/' + food_id, body, options ).map((res: Response) => res.json());
+  // }
+
+  //   this.httpService.put('./api/register', this.users).subscribe(
+  //       (res: Response) => res.json());
   }
+  // app.controller('booksController',['$scope','$http',
+  //   function($scope,$http) {
+  //       $http.get("http://localhost:3000/register/data").success(function( data ) {
+  //           $scope.book=data;
+  //
+  //       });
+  //   }]);
+
 }

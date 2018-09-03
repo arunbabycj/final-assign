@@ -10,19 +10,21 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
   title = 'JSON to Table Example';
-  constructor (private httpService: HttpClient, private _chatService:SocketService) { }
+  constructor (private httpService: HttpClient, private sockServ: SocketService) { }
   users: string [];
 
   ngOnInit () {
-    this.httpService.get('./assets/authdata.json').subscribe(
-      data => {
-        this.users = data as string [];	 // FILL THE ARRAY WITH DATA.
-        //  console.log(this.arrBirds[1]);
-      },
-      (err: HttpErrorResponse) => {
-        console.log (err.message);
-      }
-    );
+
+    // this.httpService.get('./assets/authdata.json').subscribe(
+    //   data => {
+    //     this.users = data as string [];	 // FILL THE ARRAY WITH DATA.
+    //     //  console.log(this.arrBirds[1]);
+    //   },
+    //   (err: HttpErrorResponse) => {
+    //     console.log (err.message);
+    //   }
+    // );
   }
 }

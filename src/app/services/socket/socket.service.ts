@@ -35,10 +35,10 @@ export class SocketService {
     }
 
     newUserJoined(){
-        let observable = new Observable<{user:String, message:String}>(observer=>{
-            this.socket.on('new user joined', (data)=>{
-                observer.next(data);
-            });
+        let observable = new Observable<{user:String, message:String}>(
+          observer=>{
+            this.socket = io();
+            this.socket.on('new user joined', (data)=>{observer.next(data);});
             return () => {this.socket.disconnect();}
         });
 
@@ -50,10 +50,10 @@ export class SocketService {
     }
 
     userLeftRoom(){
-        let observable = new Observable<{user:String, message:String}>(observer=>{
-            this.socket.on('left room', (data)=>{
-                observer.next(data);
-            });
+        let observable = new Observable<{user:String, message:String}>(
+          observer=>{
+            this.socket = io();
+            this.socket.on('left room', (data)=>{observer.next(data);});
             return () => {this.socket.disconnect();}
         });
 
@@ -65,10 +65,10 @@ export class SocketService {
     }
 
     newMessageReceived(){
-        let observable = new Observable<{user:String, message:String}>(observer=>{
-            this.socket.on('new message', (data)=>{
-                observer.next(data);
-            });
+        let observable = new Observable<{user:String, message:String}>(
+          observer=>{
+            this.socket = io();
+            this.socket.on('new message', (data)=>{observer.next(data);});
             return () => {this.socket.disconnect();}
         });
 

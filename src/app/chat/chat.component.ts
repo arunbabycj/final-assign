@@ -10,25 +10,31 @@ import {BrowserModule} from "@angular/platform-browser";
   styleUrls: ['./chat.component.css'],
   providers:[SocketService]
 })
+
 export class ChatComponent implements OnInit {
   username:string;
   messages = [];
   message;
   connection;
+  connection1;
+  connection2;
+  connection3;
   user:string;
   room:string;
   messageText:String;
   messageArray:Array<{user:String,message:String}> = [];
 
   constructor(private sockServ: SocketService, private router:Router) {
-      this.sockServ.newUserJoined()
-      .subscribe(data=> this.messageArray.push(data));
+      // this.sockServ.newUserJoined()
+      // .subscribe(data=>this.messageArray.push(data));
+      //
+      // this.sockServ.userLeftRoom()
+      // .subscribe(data=>this.messageArray.push(data));
+      //
+      // this.sockServ.newMessageReceived()
+      // .subscribe(data=>this.messageArray.push(data));
 
-      this.sockServ.userLeftRoom()
-      .subscribe(data=>this.messageArray.push(data));
 
-      this.sockServ.newMessageReceived()
-      .subscribe(data=>this.messageArray.push(data));
   }
 
   ngOnInit() {
@@ -44,17 +50,31 @@ export class ChatComponent implements OnInit {
       //to the message array each time you have pushed a message from the server.
       this.username = sessionStorage.getItem('username');
       console.log("session started for:" + this.username);
-    //  this.connection = this.sockServ.getMessages().subscribe(message =>{
+      this.connection = this.sockServ.getMessages().subscribe(message =>{
         //message is a value of input field
-        //this.messages.push(message);
-      //  this.message = " ";
-      //});
+          this.messages.push(message);
+          this.message = " ";
+      });
     }
+
+      this.connection1 = this.sockServ.newUserJoined().subscribe(data =>{
+          this.messageArray.push(data);
+      });
+
+      this.connection2 = this.sockServ.userLeftRoom().subscribe(data =>{
+          this.messageArray.push(data);
+      });
+
+      this.connection3 = this.sockServ.newMessageReceived().subscribe(data =>{
+          this.messageArray.push(data);
+      });
+
   }
+
   sendMessages(){
     //send a chat message to the server.
     this.sockServ.sendMessages(this.message + '('+this.username+')');
-    //this.message = "";
+    this.message = "";
   }
 
   ngOnDestroy() {
@@ -74,13 +94,13 @@ export class ChatComponent implements OnInit {
 
   join(){
         this.sockServ.joinRoom({user:this.user, room:this.room});
-    }
+  }
 
-    leave(){
+  leave(){
         this.sockServ.leaveRoom({user:this.user, room:this.room});
-    }
+  }
 
-    sendMessage(){
+  sendMessage(){
         this.sockServ.sendMessage({user:this.user, room:this.room, message:this.messageText});
-    }
+  }
 }
