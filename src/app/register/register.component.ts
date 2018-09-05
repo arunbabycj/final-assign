@@ -3,10 +3,7 @@ import {FormsModule} from '@angular/forms';
 import {Router} from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { HttpErrorResponse } from '@angular/common/http';
-//import {Detail} from '../authdata.json';
-//import * as products from "../authdata.json";
-//and then using them as:
-//console.log(products.property)
+
 
 @Component({
   selector: 'app-register',
@@ -18,18 +15,31 @@ export class RegisterComponent implements OnInit {
   password : string = "";
   isUser : string = "";
 
+
+  public employees = [];
   //users: detail[] = [];
-  constructor(private router:Router, private form:FormsModule, private httpService:HttpClient) { }
+  constructor(private router:Router, private form:FormsModule, private http:HttpClient) { }
   users;
   userObj : string [];
 
     ngOnInit () {
-
+    //  this._registerService.getEmployees()
+    //    .subscribe(data => this.employees = data);
     }
 
 
   registerUser(event){
     event.preventDefault();
+
+
+  }
+
+
+}
+
+
+
+
 
    //  this.httpService.get('./assets/authdata.json').then(function(response){
    //
@@ -40,17 +50,30 @@ export class RegisterComponent implements OnInit {
    //
    // });
 
-   this.httpService.get('./assets/authdata.json').subscribe(
-   //this.httpService.get('../authdata.json').subscribe(
-     data => {
-       this.users = data ;	 // FILL THE ARRAY WITH DATA.
-       //  console.log(this.arrBirds[1]);
-       this.users.push({'name':this.username});
-       console.log(this.users);
-     },
-     (err: HttpErrorResponse) => {
-       console.log (err.message);
-     });
+   // this.httpService.get('./assets/authdata.json').subscribe(
+   // //this.httpService.get('../authdata.json').subscribe(
+   //   data => {
+   //     this.users = data ;	 // FILL THE ARRAY WITH DATA.
+   //     //  console.log(this.arrBirds[1]);
+   //     this.users.push({'name':this.username});
+   //     console.log(this.users);
+   //   },
+   //   (err: HttpErrorResponse) => {
+   //     console.log (err.message);
+   //   });
+   //
+   //   var parameter = JSON.stringify({type:"user", username:this.username});
+   //   $http.post(, parameter).
+   //   success(function(data, status, headers, config) {
+   //      // this callback will be called asynchronously
+   //      // when the response is available
+   //      console.log(data);
+   //    }).
+   //    error(function(data, status, headers, config) {
+   //      // called asynchronously if an error occurs
+   //      // or server returns response with an error status.
+   //    });
+
 
     // this.httpService({
     //        method: "post",
@@ -77,7 +100,7 @@ export class RegisterComponent implements OnInit {
 
   //   this.httpService.put('./api/register', this.users).subscribe(
   //       (res: Response) => res.json());
-  }
+
   // app.controller('booksController',['$scope','$http',
   //   function($scope,$http) {
   //       $http.get("http://localhost:3000/register/data").success(function( data ) {
@@ -85,5 +108,3 @@ export class RegisterComponent implements OnInit {
   //
   //       });
   //   }]);
-
-}

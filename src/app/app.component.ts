@@ -14,8 +14,10 @@ export class AppComponent {
   title = 'JSON to Table Example';
   constructor (private httpService: HttpClient, private sockServ: SocketService) { }
   users: string [];
+  showNav: boolean;
 
   ngOnInit () {
+    //this.showNav = true;
 
     // this.httpService.get('./assets/authdata.json').subscribe(
     //   data => {

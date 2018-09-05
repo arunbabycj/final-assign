@@ -13,11 +13,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class LoginComponent implements OnInit {
     username : string = "";
     password : string = "";
-    showNav: boolean;
+    showNav;
+
   constructor(private router:Router, private form:FormsModule) { }
 
   ngOnInit() {
-    this.showNav = true;
+      this.showNav = true;
 
   }
 

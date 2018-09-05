@@ -7,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
+  showNav: boolean;
   constructor() { }
 
   ngOnInit() {
+    this.showNav = true;
   }
 
 }

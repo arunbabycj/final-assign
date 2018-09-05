@@ -23,6 +23,7 @@ export class ChatComponent implements OnInit {
   room:string;
   messageText:String;
   messageArray:Array<{user:String,message:String}> = [];
+  showNav;
 
   constructor(private sockServ: SocketService, private router:Router) {
       // this.sockServ.newUserJoined()
@@ -38,6 +39,7 @@ export class ChatComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.showNav = true;
     //choice for valid user and subscribe to service (chat messages)
     if(!sessionStorage.getItem('username')){
       //No vaid session is available

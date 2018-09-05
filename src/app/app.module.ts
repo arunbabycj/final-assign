@@ -12,6 +12,10 @@ import { MenuComponent } from './menu/menu.component';
 import { ChatComponent } from './chat/chat.component';
 import {NotfoundComponent} from './notfound/notfound.component';
 import { RegisterComponent } from './register/register.component';
+import { HeroesComponent } from './heroes/heroes.component';
+
+import { HttpErrorHandler }     from './http-error-handler.service';
+import { MessageService }       from './message.service';
 
 @NgModule({
   declarations: [
@@ -20,7 +24,8 @@ import { RegisterComponent } from './register/register.component';
     MenuComponent,
     ChatComponent,
     NotfoundComponent,
-    RegisterComponent
+    RegisterComponent,
+    HeroesComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +33,7 @@ import { RegisterComponent } from './register/register.component';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [HttpErrorHandler,MessageService,],
   bootstrap: [AppComponent]
 })
 export class AppModule {
