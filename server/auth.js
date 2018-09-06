@@ -1,7 +1,7 @@
 module.exports = function(app,fs){
 //Route to manage user logins
   app.get('/login', (req, res) => {
-
+    console.log("inside register");
     // localhost:3000/api/auth?usename=Terry
       var uname = req.query.username;
       var userObj;

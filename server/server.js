@@ -9,6 +9,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(express.static(path.join(__dirname , '../dist/Assignment/')));
 require('./routes.js')(app, path);
-require('./socket.js')(app, io);
+require('./socket.js')(app, io, fs);
 require('./listen.js')(http);
 require('./register.js')(app,fs);

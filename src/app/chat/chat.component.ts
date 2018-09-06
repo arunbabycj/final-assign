@@ -41,7 +41,7 @@ export class ChatComponent implements OnInit {
   ngOnInit() {
     this.showNav = true;
     //choice for valid user and subscribe to service (chat messages)
-    if(!sessionStorage.getItem('username')){
+    if(!localStorage.getItem('username')){
       //No vaid session is available
       console.log('Not validated');
       sessionStorage.clear();
@@ -50,7 +50,7 @@ export class ChatComponent implements OnInit {
     } else {
       //we have a valid username. Subscribe to chat service and add chat message
       //to the message array each time you have pushed a message from the server.
-      this.username = sessionStorage.getItem('username');
+      this.username = localStorage.getItem('username');
       console.log("session started for:" + this.username);
       this.connection = this.sockServ.getMessages().subscribe(message =>{
         //message is a value of input field

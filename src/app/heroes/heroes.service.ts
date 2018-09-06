@@ -17,7 +17,8 @@ const httpOptions = {
 @Injectable()
 export class HeroesService {
   //heroesUrl = 'api/heroes';  // URL to web api
-  heroesUrl = '"/assets/authdata.json"';  // URL to web api
+  heroesUrl = '/assets/authdata.json';  // URL to web api
+  heroesUrl1 = 'https://[::1]:3000/api/register';  // URL to web api
   private handleError: HandleError;
 
   constructor(
@@ -52,7 +53,7 @@ export class HeroesService {
 
   /** POST: add a new hero to the database */
   addHero (hero: Hero): Observable<Hero> {
-    return this.http.post<Hero>(this.heroesUrl, hero, httpOptions)
+    return this.http.post<Hero>(this.heroesUrl1, hero, httpOptions)
       .pipe(
         catchError(this.handleError('addHero', hero))
       );

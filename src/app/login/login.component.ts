@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
         console.log("storage ready");
         //name = this.username;
         //console.log(this.username);
-        sessionStorage.setItem("username", this.username);
+        localStorage.setItem("username", this.username);
         //console.log(sessionStorage.getItem("username"));
       } else {
       //  alert("sessionStorage not available");
