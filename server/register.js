@@ -1,7 +1,7 @@
 module.exports = function(app,fs){
 //Route to manage user logins
   //app.get('/api/register', (req, res) => {
-    app.get('/api/register', (req, res) => {
+    app.get('https://localhost:3000/api/register', (req, res) => {
       console.log("inside register");
       var isUser = 0;
       var userObj;

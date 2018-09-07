@@ -11,7 +11,7 @@ import { HeroesComponent } from './heroes/heroes.component';
 const routes: Routes = [
   {path:'login', component:LoginComponent},
   {path:'heroes', component:HeroesComponent},
-  {path:'register', component:RegisterComponent},
+  {path:'register', component:HeroesComponent},
   {path:'menu', component:MenuComponent},
   {path:'chat', component:ChatComponent},
   {path:'404', component:NotfoundComponent},

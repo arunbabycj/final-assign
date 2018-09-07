@@ -18,7 +18,7 @@ const httpOptions = {
 export class HeroesService {
   //heroesUrl = 'api/heroes';  // URL to web api
   heroesUrl = '/assets/authdata.json';  // URL to web api
-  heroesUrl1 = 'https://[::1]:3000/api/register';  // URL to web api
+  heroesUrl1 = 'https://localhost/api/register';  // URL to web api
   private handleError: HandleError;
 
   constructor(
@@ -60,24 +60,24 @@ export class HeroesService {
   }
 
   /** DELETE: delete the hero from the server */
-  // deleteHero (id: number): Observable<{}> {
-  //   const url = `${this.heroesUrl}/${id}`; // DELETE api/heroes/42
-  //   return this.http.delete(url, httpOptions)
-  //     .pipe(
-  //       catchError(this.handleError('deleteHero'))
-  //     );
-  // }
+  deleteHero (id: number): Observable<{}> {
+     const url = `${this.heroesUrl}/${id}`; // DELETE api/heroes/42
+     return this.http.delete(url, httpOptions)
+       .pipe(
+         catchError(this.handleError('deleteHero'))
+       );
+  }
 
-  /** PUT: update the hero on the server. Returns the updated hero upon success. */
-  // updateHero (hero: Hero): Observable<Hero> {
-  //   httpOptions.headers =
-  //     httpOptions.headers.set('Authorization', 'my-new-auth-token');
-  //
-  //   return this.http.put<Hero>(this.heroesUrl, hero, httpOptions)
-  //     .pipe(
-  //       catchError(this.handleError('updateHero', hero))
-  //     );
-  // }
+  // /** PUT: update the hero on the server. Returns the updated hero upon success. */
+   updateHero (hero: Hero): Observable<Hero> {
+    httpOptions.headers =
+      httpOptions.headers.set('Authorization', 'my-new-auth-token');
+
+    return this.http.put<Hero>(this.heroesUrl, hero, httpOptions)
+      .pipe(
+        catchError(this.handleError('updateHero', hero))
+      );
+   }
 }
 
 

@@ -39,14 +39,14 @@ export class HeroesComponent implements OnInit {
       .subscribe(hero => this.heroes.push(hero));
   }
 
-  // delete(hero: Hero): void {
-  //   this.heroes = this.heroes.filter(h => h !== hero);
-  //   this.heroesService.deleteHero(hero.id).subscribe();
-  //   /*
-  //   // oops ... subscribe() is missing so nothing happens
-  //   this.heroesService.deleteHero(hero.id);
-  //   */
-  // }
+  delete(hero: Hero): void {
+    this.heroes = this.heroes.filter(h => h !== hero);
+    this.heroesService.deleteHero(hero.id).subscribe();
+    /*
+    // oops ... subscribe() is missing so nothing happens
+    this.heroesService.deleteHero(hero.id);
+    */
+  }
 
   edit(hero) {
     this.editHero = hero;
@@ -60,17 +60,17 @@ export class HeroesComponent implements OnInit {
     }
   }
 
-  // update() {
-  //   if (this.editHero) {
-  //     this.heroesService.updateHero(this.editHero)
-  //       .subscribe(hero => {
-  //         // replace the hero in the heroes list with update from server
-  //         const ix = hero ? this.heroes.findIndex(h => h.id === hero.id) : -1;
-  //         if (ix > -1) { this.heroes[ix] = hero; }
-  //       });
-  //     this.editHero = undefined;
-  //   }
-  // }
+  update() {
+    if (this.editHero) {
+      this.heroesService.updateHero(this.editHero)
+        .subscribe(hero => {
+          // replace the hero in the heroes list with update from server
+          const ix = hero ? this.heroes.findIndex(h => h.id === hero.id) : -1;
+          if (ix > -1) { this.heroes[ix] = hero; }
+        });
+      this.editHero = undefined;
+    }
+  }
 }
 
 

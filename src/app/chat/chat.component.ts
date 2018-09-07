@@ -88,7 +88,7 @@ export class ChatComponent implements OnInit {
 
   logout(){
     //logout the user and go back to login page
-    sessionStorage.clear();
+    localStorage.clear();
     console.log("session cleared");
     this.router.navigateByUrl('login');
   }
