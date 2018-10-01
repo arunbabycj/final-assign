@@ -1,0 +1,33 @@
+.edit-form {
+  min-width : 150px;
+
+}
+
+.logbutton {
+  min-width : 150px;
+  float: right;
+}
+
+#joinedgroup {
+  min-width : 50px;
+  max-width : 200px;
+  float: right;
+}
+
+#restgroup {
+  min-width : 50px;
+  max-width : 200px;
+  float: right;
+}
+
+.field-full-width {
+  width:100%;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-column-right {
+  text-align: center;
+}

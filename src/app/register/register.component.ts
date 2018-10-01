@@ -23,8 +23,16 @@ export class RegisterComponent implements OnInit {
   userObj : string [];
 
     ngOnInit () {
-    //  this._registerService.getEmployees()
-    //    .subscribe(data => this.employees = data);
+      // this.registerservice.login(this.username,this.password).subscribe(
+      //   data=>{
+      //     sessionStorage.setItem('currentUser', data.username);
+      //     this.router.navigateByUrl('/login');
+      //   },
+      //   error=>{
+      //     alert('username and password were incorrect');
+      //   }
+      // );
+
     }
 
 
@@ -40,6 +48,8 @@ export class RegisterComponent implements OnInit {
 
 
 
+//  this._registerService.getEmployees()
+//    .subscribe(data => this.employees = data);
 
    //  this.httpService.get('./assets/authdata.json').then(function(response){
    //
