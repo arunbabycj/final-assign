@@ -47,6 +47,24 @@ export class IssueService {
     return this.http.post(`${this.uri}/groups/add`, newgroup);
   }
 
+  addNewGroup(group,sessionuser) {
+    const newgroup = {
+      groupname: group,
+      user: sessionuser
+    };
+    console.log(newgroup);
+    return this.http.post(`${this.uri}/newgroups/add`, newgroup);
+  }
+
+  deleteGroup(group,sessionuser) {
+    const newgroup = {
+    groupname: group,
+    user: sessionuser
+  };
+  console.log(newgroup);
+  return this.http.post(`${this.uri}/groups/delete`, newgroup);
+}
+
   checkUser(username){
     console.log(username);
     return this.http.get(`${this.uri}/users/check/${username}`);

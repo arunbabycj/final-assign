@@ -23,13 +23,14 @@ export class EditComponent implements OnInit {
 
   //createForm: FormGroup;
   joinedgroups: Issue[];
-  restgroups:String;
+  restgroups:Array<String> = [];
   displayedColumns = ['name'];
   sessionuser = "";
   join ="" ;
-  rest:String =" ";
-  res = "";
+  rest:Array<String> = [];
+  res:Array<String> = [];
   diffdata = [];
+  missings = [];
   constructor(private issueService: IssueService, private router: Router, private route: ActivatedRoute, private snackBar: MatSnackBar, private fb: FormBuilder) {
     this.createForm();
 
@@ -56,6 +57,7 @@ export class EditComponent implements OnInit {
       console.log("are",this.join);
       this.router.navigate(['/edit']);
     });
+
   }
 
 
@@ -71,27 +73,30 @@ export class EditComponent implements OnInit {
           num = i;
         }
         this.rest = data[num].allgroup;
-        // console.log("hi",this.rest);
-        // this.res = this.rest.filter( function(n) { return !this.has(n) }, new Set(this.join) );
-        // console.log(this.res);
-          var missings = [];
-          var matches = false;
+        console.log("hi",this.rest);
+        this.res = this.rest.filter( function(n) { return !this.has(n) }, new Set(this.join) );
+        console.log(this.res);
 
-          for ( var i = 0; i < this.rest.length; i++ ) {
-            matches = false;
-            for ( var e = 0; e < this.join.length; e++ ) {
-              if ( this.rest[i] === this.join[e] ) matches = true;
-            }
-            if(!matches) missings.push( this.rest[i] );
-          }
+          // var matches = false;
+          //
+          // for ( var i = 0; i < this.rest.length; i++ ) {
+          //   matches = false;
+          //   for ( var e = 0; e < this.join.length; e++ ) {
+          //     if ( this.rest[i] === this.join[e] ) matches = true;
+          //   }
+          //   //if(!matches) missings.push( this.rest[i] );
+          //   if(!matches) this.missings.push( this.rest[i]);
+          // }
 
       }
-      //this.restgroups = this.res;
-    //  this.restgroups = missings;
+      this.restgroups = this.res;
+      //console.log('missings '+ this.missings);
+      //this.restgroups = this.missings;
       console.log('rest group requested ... ');
       console.log(this.restgroups);
       this.router.navigate(['/edit']);
     });
+    //this.refreshPage()
   }
 
   createForm() {
@@ -119,35 +124,28 @@ export class EditComponent implements OnInit {
      });
    }
 
+  addNewGroup(element) {
+     this.issueService.addNewGroup(element,this.sessionuser).subscribe((data:any) => {
+       if (data.ok) {
+         alert("group made");
+       }else{
+         alert("group already exists");
+       }
+     });
+   }
+
+   deleteGroup(element) {
+      this.issueService.deleteGroup(element,this.sessionuser).subscribe((data:any) => {
+        if (data.ok) {
+          alert("group made");
+        }else{
+          alert("group already exists");
+        }
+      });
+    }
+
    saveGroup(element) {
      localStorage.setItem('group', element);
      console.log("session started for group:" + element);
     }
 }
-
-// ngOnInit() {
-//   this.route.params.subscribe(params => {
-//     this.updateForm.get('name').getValue(session.username);
-//     this.updateForm.get('group').getValue(session.group);
-//   });
-//
-//
-//     this.connection = this.sockServ.getMessages().subscribe(message =>{
-//       //message is a value of input field
-//         this.messages.push(message);
-//         this.message = " ";
-//     });
-//
-//     this.connection1 = this.sockServ.newUserJoined().subscribe(data =>{
-//         this.messageArray.push(data);
-//     });
-//
-//     this.connection2 = this.sockServ.userLeftRoom().subscribe(data =>{
-//         this.messageArray.push(data);
-//     });
-//
-//     this.connection3 = this.sockServ.newMessageReceived().subscribe(data =>{
-//         this.messageArray.push(data);
-//     });
-//
-// }
