@@ -17,6 +17,7 @@ import { IssueService } from '../../issue.service';
 export class ListComponent implements OnInit {
 
   createForm: FormGroup;
+  username : String;
   //issues: Issue[];
   //displayedColumns = ['name', 'price', 'description', 'type', 'actions'];
 
@@ -35,7 +36,8 @@ export class ListComponent implements OnInit {
      this.issueService.checkUser(username).subscribe((data: any) => {
        if (data.ok) {
          console.log("ready");
-         sessionStorage.setItem('username', username);
+         localStorage.setItem('username', username);
+         console.log("session started for" + username);
          this.router.navigate(['/edit']);
        }else{
          console.log("notready");

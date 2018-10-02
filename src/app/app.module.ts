@@ -18,13 +18,9 @@ import {MatToolbarModule,MatFormFieldModule,
          MatDividerModule,
          MatSnackBarModule} from '@angular/material';
 
-//import { AppRoutingModule } from './app-routing.module';
+
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-// import { LoginComponent } from './login/login.component';
-// import { MenuComponent } from './menu/menu.component';
-// import {NotfoundComponent} from './notfound/notfound.component';
-// import { RegisterComponent } from './register/register.component';
 
 import { ChatComponent } from './component/chat/chat.component';
 import { CreateComponent } from './component/create/create.component';

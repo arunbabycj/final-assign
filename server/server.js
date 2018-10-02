@@ -33,7 +33,6 @@ MongoClient.connect(url, { useNewUrlParser: true }, function(err, client) {
     require('./read.js')(app, db);
     require('./add.js')(app, db);
     require('./update.js')(app, db);
-    require('./socket.js')(app, io, fs);
     require('./remove.js')(app, db);
 
 

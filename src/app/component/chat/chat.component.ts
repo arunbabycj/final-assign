@@ -1,14 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {SocketService} from '../../services/socket/socket.service';
+import {Router} from "@angular/router";
 import {CommonModule} from "@angular/common";
 import {BrowserModule} from "@angular/platform-browser";
-import { Router, ActivatedRoute } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
-import { MatSnackBar } from '@angular/material';
-
-import { IssueService } from '../../issue.service';
-import { Issue } from '../../issue.model';
 
 @Component({
   selector: 'app-chat',
@@ -19,6 +13,7 @@ import { Issue } from '../../issue.model';
 
 export class ChatComponent implements OnInit {
   username:string;
+  group:string;
   messages = [];
   message;
   connection;
@@ -30,31 +25,17 @@ export class ChatComponent implements OnInit {
   messageText:String;
   messageArray:Array<{user:String,message:String}> = [];
   showNav;
-  updateForm: FormGroup;
 
-  constructor(private sockServ: SocketService,
-              private router:Router,
-              private route: ActivatedRoute,
-              private issueService: IssueService,
-              private snackBar: MatSnackBar,
-              private fb: FormBuilder) {
-        this.createForm();
-  }
+  constructor(private sockServ: SocketService, private router:Router) {
 
-  createForm() {
-    this.updateForm = this.fb.group({
-      name: ['', Validators.required],
-      group: '',
-      chathistory: ''
-    });
   }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.updateForm.get('name').getValue(session.username);
-      this.updateForm.get('group').getValue(session.group);
-    });
 
+      //we have a valid username. Subscribe to chat service and add chat message
+      //to the message array each time you have pushed a message from the server.
+      this.username = localStorage.getItem('username');
+      this.group = localStorage.getItem('group');
 
       this.connection = this.sockServ.getMessages().subscribe(message =>{
         //message is a value of input field
@@ -92,20 +73,21 @@ export class ChatComponent implements OnInit {
   logout(){
     //logout the user and go back to login page
     localStorage.clear();
-    console.log("session cleared");
+    console.log("session cleared fro user and group");
     this.router.navigateByUrl('login');
   }
 
 
   join(){
-        this.sockServ.joinRoom({user:this.user, room:this.room});
+        this.sockServ.joinRoom({user:this.username, room:this.group});
   }
 
   leave(){
-        this.sockServ.leaveRoom({user:this.user, room:this.room});
+        this.sockServ.leaveRoom({user:this.username, room:this.group});
   }
 
   sendMessage(){
-        this.sockServ.sendMessage({user:this.user, room:this.room, message:this.messageText});
+        this.sockServ.sendMessage({user:this.username, room:this.group, message:this.messageText});
+        this.messageText = " ";
   }
 }

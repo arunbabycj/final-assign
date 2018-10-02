@@ -37,7 +37,7 @@ export class EditComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.sessionuser = sessionStorage.getItem('username');
+      this.sessionuser = localStorage.getItem('username');
       console.log(this.sessionuser);
       this.updateForm.get('name').setValue(this.sessionuser);
     });
@@ -105,7 +105,7 @@ export class EditComponent implements OnInit {
   }
 
   logout() {
-    sessionStorage.setItem('username', "");
+    localStorage.setItem('username', "");
     this.router.navigate(['/list']);
   }
 
@@ -120,8 +120,8 @@ export class EditComponent implements OnInit {
    }
 
    saveGroup(element) {
-     sessionStorage.setItem('group', element);
-     console.log(element);
+     localStorage.setItem('group', element);
+     console.log("session started for group:" + element);
     }
 }
 
